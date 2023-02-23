@@ -4,12 +4,12 @@
 #                                   prediction of differences in cognitive performance                                      #
 #                                     in children: Findings from ABCD (N= 11 876)                                           #
 #                                                                                                                           #
-#                                            Michel et al, 2023, __Name of the journal__                                    #
+#                                            Michel et al, 2023,                                                            #
 #                                                                                                                           #
 #---------------------------------------------------------------------------------------------------------------------------#
 #                                                                                                                           #
 #                                      URL & DOI:                                                                           #
-#                                 Supplementary materials:                                                                  #
+#                                 Supplementary materials: https://osf.io/eygwz                                             #
 #                                                                                                                           #
 #---------------------------------------------------------------------------------------------------------------------------#
 #                                                                                                                           #
