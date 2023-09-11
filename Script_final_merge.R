@@ -4,12 +4,12 @@
 #                                   prediction of differences in cognitive performance                                      #
 #                                     in children: Findings from ABCD (N= 11 876)                                           #
 #                                                                                                                           #
-#                                            Michel et al, 2023,                                                            #
+#                                            Michel et al, 2023, __Name of the journal__                                    #
 #                                                                                                                           #
 #---------------------------------------------------------------------------------------------------------------------------#
 #                                                                                                                           #
 #                                      URL & DOI:                                                                           #
-#                                 Supplementary materials: https://osf.io/eygwz                                             #
+#                                 Supplementary materials:                                                                  #
 #                                                                                                                           #
 #---------------------------------------------------------------------------------------------------------------------------#
 #                                                                                                                           #
@@ -29,11 +29,11 @@
 
 # This script reproduces all the analyses from the paper
 # To reproduce results exactly, please request raw data from https://nda.nih.gov/nda/access-data-info.html
-# Script author: Lea Michel, 2022, using RStudio (version 4.1.0)
+# Script author: Lea Michel, 2023, using RStudio (version 4.1.0)
 
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 #Load libraries
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 
 library(ggplot2)
 library(ggpubr) 
@@ -107,9 +107,9 @@ data_greymatter <- data_greymatter %>%
 data_whitematter <- data_whitematter %>%
   filter(eventname == "baseline_year_1_arm_1") 
 
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 #Cleaning the datasets
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 
 #Checking the class of the variables
 sapply(data_cognition,class)
@@ -145,9 +145,9 @@ data_cognition_clean[,5:9]<-scale(data_cognition_clean[,5:9])
 data_greymatter[,5:208]<-scale(data_greymatter[,5:208])
 data_whitematter[,5:115]<-scale(data_whitematter[,5:115])
 
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 #Average every regions of interest bilaterally
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 
 data_greymatter_lat <- data_greymatter %>%
   mutate(bankssts_ct=(as.numeric(lh_bankssts_ct)+as.numeric(rh_bankssts_ct))/2,
@@ -318,9 +318,9 @@ data_whitematter_lat <- data_whitematter %>%
   select(-one_of("lh_fornix_wmv","lh_cingulatecingulum_wmv","lh_parahippocampalcingulum_wmv","lh_corticospinalpyramidal_wmv","lh_anteriorthalamicradiations_wmv","lh_uncinate_wmv","lh_inferiorlongitudinalfasiculus_wmv","lh_inferiorfrontooccipitalfasiculus_wmv","lh_superiorlongitudinalfasiculus_wmv","lh_temporalsuperiorlongitudinalfasiculus_wmv","lh_parietalsuperiorlongitudinalfasiculus_wmv","lh_superiorcorticostriate_wmv","lh_superiorcorticostriatefrontalcortex_wmv","lh_superiorcorticostriateparietalcortex_wmv","lh_striatalinferiorfrontalcortex_wmv","lh_inferiorfrontalsuperiorfrontalcortex_wmv","lh_fornix_exfimbria_wmv"))%>%
   select(-one_of("rh_fornix_wmv","rh_cingulatecingulum_wmv","rh_parahippocampalcingulum_wmv","rh_corticospinalpyramidal_wmv","rh_anteriorthalamicradiations_wmv","rh_uncinate_wmv","rh_inferiorlongitudinalfasiculus_wmv","rh_inferiorfrontooccipitalfasiculus_wmv","rh_superiorlongitudinalfasiculus_wmv","rh_temporalsuperiorlongitudinalfasiculus_wmv","rh_parietalsuperiorlongitudinalfasiculus_wmv","rh_superiorcorticostriate_wmv","rh_superiorcorticostriatefrontalcortex_wmv","rh_superiorcorticostriateparietalcortex_wmv","rh_striatalinferiorfrontalcortex_wmv","rh_inferiorfrontalsuperiorfrontalcortex_wmv","rh_fornix_exfimbria_wmv"))
 
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 #Creation of the merge and processed datasets
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 
 #Merge all the datasets together
 data_brain<-merge(data_greymatter_lat,data_whitematter_lat,by=c("subjectkey","eventname","interview_age","sex"),all=T)
@@ -336,13 +336,13 @@ setwd("C:/Users/leamic/Documents/Project 1/Data/Processed data")
 write.csv(data_total_subsample15,'data_total_subsample15.csv',row.names=F)
 write.csv(data_total_subsample85,'data_total_subsample85.csv',row.names=F)
 
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
 #Descriptives
--------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------
   
 #Visualize each variable
 view(dfSummary(data_total[,c(1:9,10,112)]))  
 
 #Correlations of the cognitive tasks (skip id, event, age and sex)
-corrplot(cor(data_total[,c(5:9)],use="pairwise.complete.obs"))
+corrplot(cor(data_total[,c(5:9)],use="pairwise.complete.obs"), addCoef.col ='white',method = 'circle', type = 'lower',diag=FALSE)
 cor(data_total[,c(5:9)],use="pairwise.complete.obs")
